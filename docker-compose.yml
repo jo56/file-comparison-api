@@ -1,0 +1,11 @@
+version: "3.13"
+
+services:
+  connection-service:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - ~/.aws:/home/appuser/.aws
+    ports:
+      - 5000:5000

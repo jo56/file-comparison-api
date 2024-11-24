@@ -1,5 +1,6 @@
 {
     "family": "file-comparison-service",
+    "executionRoleArn": "ecsExecutionRole",
     "containerDefinitions": [
       {
         "logConfiguration": {

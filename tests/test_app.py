@@ -14,11 +14,11 @@ class AppTests(TestCase):
     def setUp(self):
         env_overrides = {}
 
-        from src import app
+        from . import main
 
-        importlib.reload(app)
-        self.app = app.app
-        self.client = app.app.test_client()
+        importlib.reload(main)
+        self.app = main.app
+        self.client = main.app.test_client()
 
     def test_md_compare(self):
         pass

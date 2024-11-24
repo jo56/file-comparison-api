@@ -15,7 +15,7 @@ RUN pip install pipenv && \
 COPY . /app
 
 # Expose the port FastAPI will run on
-EXPOSE 8000
+EXPOSE 5000
 
 # Command to run the FastAPI app
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "5000"]

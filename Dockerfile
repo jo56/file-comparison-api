@@ -12,10 +12,11 @@ RUN apt-get update && apt-get install -y dumb-init
 COPY --from=build /.venv /.venv
 ENV PATH="/.venv/bin:$PATH"
 
-RUN useradd --create-home appuser
-WORKDIR /home/appuser
-USER appuser
+# Expose the port that FastAPI will run on
+EXPOSE 8000
 
-COPY src src
-ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-CMD ["uvicorn src.main:app --reload"]
+# Set the environment variable for FastAPI's server (production-ready)
+ENV UVICORN_CMD="uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4"
+
+# Command to run FastAPI when the container starts
+CMD ["sh", "-c", "$UVICORN_CMD"]

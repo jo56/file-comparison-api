@@ -1,0 +1,38 @@
+{
+    "family": "file-comparison-service",
+    "containerDefinitions": [
+      {
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-group": "/ecs/file-comparison-service-task-def",
+            "awslogs-region": "us-east-1",
+            "awslogs-stream-prefix": "ecs"
+          }
+        },
+        "portMappings": [
+          {
+            "hostPort": 5000,
+            "protocol": "tcp",
+            "containerPort": 5000
+          }
+        ],
+        "name": "file-comparison-service",
+        "environment": [
+          {
+            "name": "TEST_NAME",
+            "value": "TEST"
+          }
+        ]
+      }
+    ],
+    "cpu": "512",
+    "memory": "1024",
+    "requiresCompatibilities": ["FARGATE"],
+    "networkMode": "awsvpc",
+    "volumes": [],
+    "ephemeralStorage": {
+      "sizeInGiB": 25
+    }
+  }
+  

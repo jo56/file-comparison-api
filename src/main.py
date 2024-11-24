@@ -1,7 +1,7 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
-from model.compare_service import CompareService
-from model.comparison_file import ComparisonFile
+from src.model.compare_service import CompareService
+from src.model.comparison_file import ComparisonFile
 
 app = FastAPI()
 

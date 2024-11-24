@@ -15,9 +15,11 @@ ENV PATH="/.venv/bin:$PATH"
 # Expose the port that FastAPI will run on
 EXPOSE 8000
 
+COPY src src
+
 WORKDIR /
 # Set the environment variable for FastAPI's server (production-ready)
-ENV UVICORN_CMD="uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4"
+ENV UVICORN_CMD="uvicorn src.main:app --host 0.0.0.0 --port 8000 --workers 4"
 
 # Command to run FastAPI when the container starts
 CMD ["sh", "-c", "$UVICORN_CMD"]

@@ -1,4 +1,4 @@
-from model.comparison_file import ComparisonFile
+from src.model.comparison_file import ComparisonFile
 import io
 import difflib
 #from abc import ABC, abstractmethod

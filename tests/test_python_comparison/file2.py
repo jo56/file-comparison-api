@@ -4,7 +4,7 @@ import difflib
 
 class py_compare_service(compare_service):
 
-    
+    x
     
     @staticmethod
     def compare(self, file1: UploadFile, file2: UploadFile):

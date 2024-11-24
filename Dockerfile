@@ -1,4 +1,4 @@
-FROM python:3.13-slim-buster as base
+FROM python:3.13-slim-bullseye as base
 
 FROM base as build
 RUN apt-get update && apt-get install -y --no-install-recommends gcc

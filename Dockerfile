@@ -1,26 +1,21 @@
-FROM python:3.13-slim-bullseye as base
+# Use an official Python runtime as a parent image
+FROM python:3.13-slim-bullseye
 
-FROM base as build
-RUN apt-get update && apt-get install -y --no-install-recommends gcc
-RUN pip install pipenv
-COPY Pipfile .
-COPY Pipfile.lock .
-RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --deploy
+# Set the working directory
+WORKDIR /app
 
-FROM base AS runtime
-RUN apt-get update && apt-get install -y dumb-init
-COPY --from=build /.venv /.venv
-ENV PATH="/.venv/bin:$PATH"
+# Copy dependency files
+COPY Pipfile Pipfile.lock /app/
 
-# Expose the port that FastAPI will run on
+# Install pipenv and dependencies
+RUN pip install pipenv && \
+    pipenv install --system --deploy --ignore-pipfile
+
+# Copy the FastAPI app code into the container
+COPY . /app
+
+# Expose the port FastAPI will run on
 EXPOSE 8000
 
-COPY src src
-
-WORKDIR /
-# Set the environment variable for FastAPI's server (production-ready)
-ENV UVICORN_CMD="uvicorn src.main:app --host 0.0.0.0 --port 8000 --workers 4"
-
-# Command to run FastAPI when the container starts
-CMD ["sh", "-c", "$UVICORN_CMD"]
-
+# Command to run the FastAPI app
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

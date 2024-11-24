@@ -18,4 +18,4 @@ USER appuser
 
 COPY src src
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-CMD ["uvicorn main:app --reload"]
+CMD ["uvicorn src.main:app --reload"]

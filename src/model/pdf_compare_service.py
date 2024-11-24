@@ -1,7 +1,7 @@
 from fastapi import UploadFile
 from src.model.compare_service import CompareService
 
-class pdf_compare_service(compare_service):
+class pdf_compare_service(CompareService):
     
     @staticmethod
     def compare(self, file1: UploadFile, file2: UploadFile):

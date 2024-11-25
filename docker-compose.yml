@@ -9,4 +9,4 @@ services:
       - ~/.aws:/home/appuser/.aws
     ports:
       - 5000:5000
-    command: uvicorn app.src.main:app --host 0.0.0.0 --port 5000
+    command: uvicorn src.main:app --host 0.0.0.0 --port 5000

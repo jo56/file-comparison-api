@@ -9,6 +9,11 @@ app = FastAPI()
 def read_root():
     return {"Sucessful": "Connection"}
 
+@app.get("/health")
+def health_check():
+    return {"Health": "Sucessful"}
+
+
 @app.post("/upload")
 async def upload_files(
     file1: UploadFile = File(...), 

@@ -9,7 +9,7 @@ env:
   PIPENV_VENV_IN_PROJECT: 1
   AWS_REGION: us-east-1
   ECR_REPOSITORY: file-comparison-service
-  ECS_SERVICE: file-comparison-service-2
+  ECS_SERVICE: file-comparison-service
   ECS_TASK_FAMILY: file-comparison-service-task-def
   ECS_CLUSTER: file-comparison-service-cluster
   ECS_TASK_DEFINITION: aws/ecs-task-def.json

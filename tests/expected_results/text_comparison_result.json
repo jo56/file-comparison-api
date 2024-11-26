@@ -1,0 +1,33 @@
+{
+    "num_changed_sections": 1,
+    "total_lines_affected": {
+        "file1": 6,
+        "file2": 0
+    },
+    "file_index": [
+        "--- text_file1.txt",
+        "+++ text_file2.txt"
+    ],
+    "changed_sections": [
+        {
+            "file1": {
+                "starting_line": "-1",
+                "line_total": "6",
+                "exclusive_lines": [
+                    "gsagsfbsd",
+                    "",
+                    "43ghh",
+                    "7",
+                    "75",
+                    "46yy45"
+                ]
+            },
+            "file2": {
+                "starting_line": "0",
+                "line_total": "0",
+                "exclusive_lines": []
+            },
+            "full_text_difference": "\n-gsagsfbsd\n-\n-43ghh\n-7\n-75\n-46yy45\n"
+        }
+    ]
+}

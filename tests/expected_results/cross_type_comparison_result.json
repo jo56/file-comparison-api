@@ -1,0 +1,51 @@
+{
+    "num_changed_sections": 1,
+    "total_lines_affected": {
+        "file1": 18,
+        "file2": 5
+    },
+    "file_index": [
+        "--- pdf_file2.pdf",
+        "+++ ts_file2.ts"
+    ],
+    "changed_sections": [
+        {
+            "file1": {
+                "starting_line": "-1",
+                "line_total": "19",
+                "exclusive_lines": [
+                    "// This example requires the Visualization library. Include the ",
+                    "libraries=visualization",
+                    "// parameter when you first load the API. For example:",
+                    "// <script ",
+                    "src=\"https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualizatio",
+                    "n\">",
+                    "let map: google.maps.Map, heatmap: google.maps.visualization.HeatmapLayer;",
+                    "function initMap(): void {",
+                    "  map = new google.maps.Map(document.getElementById(\"map\") as HTMLElement, {",
+                    "    mapTypeId: \"satellite\",",
+                    "  });",
+                    "  heatmap = new google.maps.visualization.HeatmapLayer({",
+                    "    data: getPoints(),",
+                    "    map: map,",
+                    "  });",
+                    "function toggleHeatmap() {",
+                    "  heatmap.setMap(heatmap.getMap() ? null : map);",
+                    "}P"
+                ]
+            },
+            "file2": {
+                "starting_line": "1",
+                "line_total": "6",
+                "exclusive_lines": [
+                    "const oauth = {",
+                    "    // Domain name",
+                    "",
+                    "    // optional, for Cognito hosted ui specified options",
+                    "   "
+                ]
+            },
+            "full_text_difference": "\n-// This example requires the Visualization library. Include the \n-libraries=visualization\n-// parameter when you first load the API. For example:\n-// <script \n-src=\"https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualizatio\n-n\">\n-let map: google.maps.Map, heatmap: google.maps.visualization.HeatmapLayer;\n-function initMap(): void {\n-  map = new google.maps.Map(document.getElementById(\"map\") as HTMLElement, {\n-    mapTypeId: \"satellite\",\n-  });\n-  heatmap = new google.maps.visualization.HeatmapLayer({\n-    data: getPoints(),\n-    map: map,\n-  });\n+const oauth = {\n+    // Domain name\n+\n+    // optional, for Cognito hosted ui specified options\n+   \n }\n-function toggleHeatmap() {\n-  heatmap.setMap(heatmap.getMap() ? null : map);\n-}P\n"
+        }
+    ]
+}

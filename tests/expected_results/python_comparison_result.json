@@ -1,0 +1,51 @@
+{
+    "num_changed_sections": 2,
+    "total_lines_affected": {
+        "file1": 4,
+        "file2": 5
+    },
+    "file_index": [
+        "--- python_file1.py",
+        "+++ python_file2.py"
+    ],
+    "changed_sections": [
+        {
+            "file1": {
+                "starting_line": "-4",
+                "line_total": "14",
+                "exclusive_lines": [
+                    "    ",
+                    "        with open(file1, 'r') as f1, open(file2, 'r') as f2:",
+                    "            file1_lines = f1.readlines()",
+                    "            file2_lines = f2.readlines()"
+                ]
+            },
+            "file2": {
+                "starting_line": "4",
+                "line_total": "12",
+                "exclusive_lines": [
+                    "    x",
+                    "        "
+                ]
+            },
+            "full_text_difference": "\n \n class py_compare_service(compare_service):\n \n-    \n+    x\n     \n     @staticmethod\n     def compare(self, file1: UploadFile, file2: UploadFile):\n         \"\"\"Compare 2 files.\"\"\"\n-        with open(file1, 'r') as f1, open(file2, 'r') as f2:\n-            file1_lines = f1.readlines()\n-            file2_lines = f2.readlines()\n+        \n \n         # Generate a unified diff\n         diff = difflib.unified_diff(\n"
+        },
+        {
+            "file1": {
+                "starting_line": "-26",
+                "line_total": "5",
+                "exclusive_lines": []
+            },
+            "file2": {
+                "starting_line": "24",
+                "line_total": "8",
+                "exclusive_lines": [
+                    "        with open(file1, 'r') as f1, open(file2, 'r') as f2:",
+                    "            file1_lines = f1.readlines()",
+                    "            file2_lines = f2.readlines()"
+                ]
+            },
+            "full_text_difference": "\n         for line in diff:\n             print(line)\n         \n+        with open(file1, 'r') as f1, open(file2, 'r') as f2:\n+            file1_lines = f1.readlines()\n+            file2_lines = f2.readlines()\n \n         \n"
+        }
+    ]
+}

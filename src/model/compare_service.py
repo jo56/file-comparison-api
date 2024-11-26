@@ -25,12 +25,11 @@ class CompareService():
         combined_diff = ""
         for specific_diff in diff:
              combined_diff += specific_diff + "\n"
-            #print("==============")
 
-        #diff_result = '\n'.join(diff)
         if combined_diff == "":
             filename_format = f"--- {compfile1.filename}\n+++ {compfile2.filename}\n"
             return ComparisonServiceOutput(filename_format, [] , 0, 0)
+
         diff_result = combined_diff
         print("diff_result")
         print(diff_result)

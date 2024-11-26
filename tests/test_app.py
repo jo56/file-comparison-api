@@ -7,6 +7,7 @@ from src.model.compare_service import CompareService
 import os
 import asyncio
 import unittest
+import json
 
 
 class AppTests(unittest.IsolatedAsyncioTestCase):
@@ -18,115 +19,109 @@ class AppTests(unittest.IsolatedAsyncioTestCase):
     def tearDownClass(cls) -> None:
         pass
 
-    def setUp(self):
-        env_overrides = {}
-
     async def test_txt_compare(self):
 
         current_dir = os.path.dirname(__file__)
-        
         file1_path =  os.path.join(current_dir, "test_files",  "text", "text_file1.txt")
         file2_path =  os.path.join(current_dir, "test_files", "text", "text_file2.txt")
         file1 = await create_comparison_file_from_local(file1_path)
         file2 = await create_comparison_file_from_local(file2_path)
 
         output = CompareService.compare(file1, file2)
-
         output_json = convert_output_to_json(output)
+        expected_response_path = os.path.join(current_dir, "expected_Results", "text_comparison_result.json")
 
-        expected_response = {
-        "num_changed_sections": 1,
-        "total_lines_affected": {
-            "file1": 6,
-            "file2": 0
-        },
-        "file_index": [
-            "--- text_file1.txt",
-            "+++ text_file2.txt"
-        ],
-        "changed_sections": [
-            {
-                "file1": {
-                    "starting_line": "-1",
-                    "line_total": "6",
-                    "exclusive_lines": [
-                        "gsagsfbsd",
-                        "",
-                        "43ghh",
-                        "7",
-                        "75",
-                        "46yy45"
-                    ]
-                },
-                "file2": {
-                    "starting_line": "0",
-                    "line_total": "0",
-                    "exclusive_lines": []
-                },
-                "full_text_difference": "\n-gsagsfbsd\n-\n-43ghh\n-7\n-75\n-46yy45\n"
-            }
-        ]
-    }
-        
-        self.assertDictEqual(output_json, expected_response)
+        with open(expected_response_path, "r") as expected_response_json:
+            expected_response = json.load(expected_response_json)
+            self.assertDictEqual(output_json, expected_response)
 
     async def test_pdf_compare(self):
 
         current_dir = os.path.dirname(__file__)
-        
-        file1_path =  os.path.join(current_dir, "test_files",  "text", "text_file1.txt")
-        file2_path =  os.path.join(current_dir, "test_files", "text", "text_file2.txt")
+        file1_path =  os.path.join(current_dir, "test_files",  "pdf", "pdf_file1.pdf")
+        file2_path =  os.path.join(current_dir, "test_files", "pdf", "pdf_file2.pdf")
         file1 = await create_comparison_file_from_local(file1_path)
         file2 = await create_comparison_file_from_local(file2_path)
 
         output = CompareService.compare(file1, file2)
+        output_json = convert_output_to_json(output)
+        expected_response_path = os.path.join(current_dir, "expected_results", "pdf_comparison_result.json")
+        
+        with open(expected_response_path, "r") as expected_response_json:
+            expected_response = json.load(expected_response_json)
+            self.assertDictEqual(output_json, expected_response)
 
+    async def test_python_compare(self):
+
+        current_dir = os.path.dirname(__file__)
+        file1_path =  os.path.join(current_dir, "test_files",  "python", "python_file1.py")
+        file2_path =  os.path.join(current_dir, "test_files", "python", "python_file2.py")
+        file1 = await create_comparison_file_from_local(file1_path)
+        file2 = await create_comparison_file_from_local(file2_path)
+
+        output = CompareService.compare(file1, file2)
+        output_json = convert_output_to_json(output)
+        expected_response_path = os.path.join(current_dir, "expected_results", "python_comparison_result.json")
+
+        with open(expected_response_path, "r") as expected_response_json:
+            expected_response = json.load(expected_response_json)
+            self.assertDictEqual(output_json, expected_response)
+
+    async def test_typescript_compare(self):
+
+        current_dir = os.path.dirname(__file__)
+        file1_path =  os.path.join(current_dir, "test_files",  "typescript", "ts_file1.ts")
+        file2_path =  os.path.join(current_dir, "test_files", "typescript", "ts_file2.ts")
+        file1 = await create_comparison_file_from_local(file1_path)
+        file2 = await create_comparison_file_from_local(file2_path)
+
+        output = CompareService.compare(file1, file2)
+        output_json = convert_output_to_json(output)
+        expected_response_path = os.path.join(current_dir, "expected_results", "typescript_comparison_result.json")
+
+        with open(expected_response_path, "r") as expected_response_json:
+            expected_response = json.load(expected_response_json)
+            self.assertDictEqual(output_json, expected_response)
+
+    async def test_cross_type_compare(self):
+
+        current_dir = os.path.dirname(__file__)
+        file1_path =  os.path.join(current_dir, "test_files",  "pdf", "pdf_file2.pdf")
+        file2_path =  os.path.join(current_dir, "test_files", "typescript", "ts_file2.ts")
+        file1 = await create_comparison_file_from_local(file1_path)
+        file2 = await create_comparison_file_from_local(file2_path)
+
+        output = CompareService.compare(file1, file2)
+        output_json = convert_output_to_json(output)
+        expected_response_path = os.path.join(current_dir, "expected_results", "cross_type_comparison_result.json")
+
+        with open(expected_response_path, "r") as expected_response_json:
+            expected_response = json.load(expected_response_json)
+            self.assertDictEqual(output_json, expected_response)
+
+    async def test_same_file_compare(self):
+
+        current_dir = os.path.dirname(__file__)
+        file1_path =  os.path.join(current_dir, "test_files", "typescript", "ts_file2.ts")
+        file1 = await create_comparison_file_from_local(file1_path)
+        file2 = file1
+
+        output = CompareService.compare(file1, file2)
         output_json = convert_output_to_json(output)
 
         expected_response = {
-        "num_changed_sections": 1,
-        "total_lines_affected": {
-            "file1": 6,
-            "file2": 0
-        },
-        "file_index": [
-            "--- text_file1.txt",
-            "+++ text_file2.txt"
-        ],
-        "changed_sections": [
-            {
-                "file1": {
-                    "starting_line": "-1",
-                    "line_total": "6",
-                    "exclusive_lines": [
-                        "gsagsfbsd",
-                        "",
-                        "43ghh",
-                        "7",
-                        "75",
-                        "46yy45"
-                    ]
-                },
-                "file2": {
-                    "starting_line": "0",
-                    "line_total": "0",
-                    "exclusive_lines": []
-                },
-                "full_text_difference": "\n-gsagsfbsd\n-\n-43ghh\n-7\n-75\n-46yy45\n"
-            }
-        ]
-    }
-        
+            "num_changed_sections": 0,
+            "total_lines_affected": {
+                "file1": 0,
+                "file2": 0
+            },
+            "file_index": [
+                "--- ts_file2.ts",
+                "+++ ts_file2.ts"
+            ],
+            "changed_sections": []
+        }
         self.assertDictEqual(output_json, expected_response)
-
-    def test_pdf_compare(self):
-        pass
-
-    def test_py_compare(self):
-        pass
-
-    def test_ts_compare(self):
-        pass
 
    
 def create_upload_file_from_local(file_path: str) -> UploadFile:

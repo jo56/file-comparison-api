@@ -35,7 +35,7 @@ async def compare_files(
 
     return output_json
 
-def convert_output_to_json(output: ComparisonServiceOutput):
+def convert_output_to_json(output: ComparisonServiceOutput) -> dict:
     comparison_list = output.changes
     file_index = output.filename_index
 
@@ -73,7 +73,7 @@ def convert_output_to_json(output: ComparisonServiceOutput):
     return output_json
 
 
-async def generate_comparison_file(file: UploadFile):
+async def generate_comparison_file(file: UploadFile) -> ComparisonFile:
     if not file.filename.endswith((".pdf", ".txt", ".py", ".ts")):
         raise HTTPException(status_code=422, 
                             detail="Invalid format. Only accepts .pdf, .txt, .py, and .ts")

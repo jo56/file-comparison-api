@@ -28,5 +28,5 @@ jobs:
         run: pipenv install --deploy --dev
 
       - name: Run test suite
-        run: pipenv run -m unittest -v
+        run: pipenv -m unittest -v
 

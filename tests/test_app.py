@@ -29,7 +29,7 @@ class AppTests(unittest.IsolatedAsyncioTestCase):
         upload_file2 = create_upload_file_from_local(file2_path)
         output = await compare_files(upload_file1, upload_file2)
         
-        expected_response_path = os.path.join(current_dir, "expected_Results", "text_comparison_result.json")
+        expected_response_path = os.path.join(current_dir, "expected_results", "text_comparison_result.json")
 
         with open(expected_response_path, "r") as expected_response_json:
             expected_response = json.load(expected_response_json)

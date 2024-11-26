@@ -28,4 +28,4 @@ jobs:
         run: pipenv install --deploy --dev
 
       - name: Run test suite
-        run: pipenv run python -m unittest -v
+        run: pipenv run python -m unittest discover

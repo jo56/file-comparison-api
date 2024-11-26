@@ -8,9 +8,6 @@ import json
 #class compare_service(ABC):
 class CompareService():
 
-    
-    
-        
 
     @staticmethod
     #@abstractmethod

@@ -1,8 +1,9 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
 from src.model.compare_service import CompareService
 from src.model.comparison_file import ComparisonFile
 import json
+from PyPDF2 import PdfReader
 
 app = FastAPI()
 
@@ -26,6 +27,8 @@ async def upload_files(
             {"error": "Both files must have valid filenames"}, status_code=400
         ) 
     
+    """
+    
     file1_content = await file1.read()
     file2_content = await file2.read()
 
@@ -35,6 +38,10 @@ async def upload_files(
 
     file1_obj = ComparisonFile(file1.filename, file1_text)
     file2_obj = ComparisonFile(file2.filename, file2_text)
+    """
+
+    file1_obj = generate_comparison_file(file1)
+    file2_obj = generate_comparison_file(file2)
     
 
     output = CompareService.compare(file1_obj, file2_obj)
@@ -76,22 +83,20 @@ async def upload_files(
 
     return output_json
 
-
-    """
-    # Save the files or process them
-    file1_path = f"./uploads/{file1.filename}"
-    file2_path = f"./uploads/{file2.filename}"
-
-    # Save files to disk
-    with open(file1_path, "wb") as f:
-        f.write(await file1.read())
-
-    with open(file2_path, "wb") as f:
-        f.write(await file2.read())
+async def generate_comparison_file(file: UploadFile):
+    if not file.filename.endswith((".pdf", ".txt", ".py", ".ts")):
+        raise HTTPException(status_code=422, 
+                            detail="Invalid format. Only accepts .pdf, .txt, .py, and .ts")
     
+    if file.filename.endswith(".pdf"):
+        pdf_reader = PdfReader(file.file)
+        text = "".join(page.extract_text() for page in pdf_reader.pages)
 
-    return {
-        "message": "Files uploaded successfully",
-        "file1": file1.filename,
-        "file2": file2.filename,
-    }"""
+    else:
+        file_content = await file.read()
+        text = file_content.decode("utf-8")
+
+
+    file_obj = ComparisonFile(file.filename, text)
+
+    return file_obj

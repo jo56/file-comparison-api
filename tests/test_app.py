@@ -33,9 +33,6 @@ class AppTests(unittest.IsolatedAsyncioTestCase):
 
         with open(expected_response_path, "r") as expected_response_json:
             expected_response = json.load(expected_response_json)
-
-            expected_file_index = [f"--- {file1_path}", f"+++ {file2_path}"]
-            expected_response["file_index"] = expected_file_index
             self.assertDictEqual(output, expected_response)
 
     async def test_pdf_compare(self):
@@ -52,8 +49,6 @@ class AppTests(unittest.IsolatedAsyncioTestCase):
         
         with open(expected_response_path, "r") as expected_response_json:
             expected_response = json.load(expected_response_json)
-            expected_file_index = [f"--- {file1_path}", f"+++ {file2_path}"]
-            expected_response["file_index"] = expected_file_index
             self.assertDictEqual(output, expected_response)
 
     async def test_python_compare(self):
@@ -70,8 +65,6 @@ class AppTests(unittest.IsolatedAsyncioTestCase):
         
         with open(expected_response_path, "r") as expected_response_json:
             expected_response = json.load(expected_response_json)
-            expected_file_index = [f"--- {file1_path}", f"+++ {file2_path}"]
-            expected_response["file_index"] = expected_file_index
             self.assertDictEqual(output, expected_response)
 
     async def test_typescript_compare(self):
@@ -88,8 +81,8 @@ class AppTests(unittest.IsolatedAsyncioTestCase):
         
         with open(expected_response_path, "r") as expected_response_json:
             expected_response = json.load(expected_response_json)
-            expected_file_index = [f"--- {file1_path}", f"+++ {file2_path}"]
-            expected_response["file_index"] = expected_file_index
+            #expected_file_index = [f"--- {os.path.basename(file1_path)}", f"+++ {os.path.basename(file1_path)}"]
+            #expected_response["file_index"] = expected_file_index
             self.assertDictEqual(output, expected_response)
 
     async def test_cross_type_compare(self):
@@ -106,8 +99,6 @@ class AppTests(unittest.IsolatedAsyncioTestCase):
 
         with open(expected_response_path, "r") as expected_response_json:
             expected_response = json.load(expected_response_json)
-            expected_file_index = [f"--- {file1_path}", f"+++ {file2_path}"]
-            expected_response["file_index"] = expected_file_index
             self.assertDictEqual(output, expected_response)
 
     async def test_same_file_compare(self):
@@ -132,8 +123,6 @@ class AppTests(unittest.IsolatedAsyncioTestCase):
             "changed_sections": []
         }
 
-        expected_file_index = [f"--- {file1_path}", f"+++ {file1_path}"]
-        expected_response["file_index"] = expected_file_index
         self.assertDictEqual(output, expected_response)
 
     async def test_invalid_format(self):

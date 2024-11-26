@@ -10,16 +10,16 @@ class CompareService():
         diff = difflib.unified_diff(compfile1.text.splitlines(), compfile2.text.splitlines(), 
                                     fromfile=compfile1.filename, tofile=compfile2.filename, lineterm='')
         combined_diff = ""
+        filename_format = f"--- {compfile1.filename}\n+++ {compfile2.filename}\n"
         for specific_diff in diff:
              combined_diff += specific_diff + "\n"
 
         if combined_diff == "":
-            filename_format = f"--- {compfile1.filename}\n+++ {compfile2.filename}\n"
             return ComparisonServiceOutput(filename_format, [] , 0, 0)
 
         raw_changed_sections_list = combined_diff.split("@@")
         changed_sections_list = filter_array(raw_changed_sections_list)
-        filenames_index = changed_sections_list.pop(0)
+        changed_sections_list.pop(0)
 
         total_differences = []
         for i in range (0, len(changed_sections_list), 2):
@@ -32,7 +32,7 @@ class CompareService():
             total_file1_lines_affected = total_file1_lines_affected + len(comp.file1.exclusive_lines)
             total_file2_lines_affected = total_file2_lines_affected + len(comp.file2.exclusive_lines)
 
-        output_result = ComparisonServiceOutput(filenames_index, total_differences, 
+        output_result = ComparisonServiceOutput(filename_format, total_differences, 
                                                 total_file1_lines_affected, total_file2_lines_affected)
         return output_result
     

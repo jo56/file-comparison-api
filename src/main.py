@@ -4,6 +4,7 @@ from src.model.compare_service import CompareService, ComparisonServiceOutput
 from src.model.comparison_file import ComparisonFile
 import json
 from PyPDF2 import PdfReader
+import os
 
 app = FastAPI()
 
@@ -86,6 +87,8 @@ async def generate_comparison_file(file: UploadFile) -> ComparisonFile:
         file_content = await file.read()
         text = file_content.decode("utf-8")
 
-    file_obj = ComparisonFile(file.filename, text)
+    base_filename = os.path.basename(file.filename)
+
+    file_obj = ComparisonFile(base_filename, text)
 
     return file_obj

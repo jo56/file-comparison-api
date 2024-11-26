@@ -21,7 +21,6 @@ async def compare_files(
     file1: UploadFile = File(...), 
     file2: UploadFile = File(...)
 ):
-    # Ensure the files have valid filenames
     if not file1.filename or not file2.filename:
         return JSONResponse(
             {"error": "Both files must have valid filenames"}, status_code=400

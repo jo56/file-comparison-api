@@ -130,38 +130,13 @@ class AppTests(unittest.IsolatedAsyncioTestCase):
         upload_file1 = create_upload_file_from_local(file1_path)
         upload_file2 = create_upload_file_from_local(file2_path)
 
-        with self.assertRaises(HTTPException) as context:
+        with self.assertRaises(HTTPException):
             await compare_files(upload_file1, upload_file2)
-
-        #file1 = await create_comparison_file_from_local(file1_path)
-        #file2 = await create_comparison_file_from_local(file2_path)
-
-        #output = CompareService.compare(file1, file2)
-        #self.assertRaises(HTTPException, compare_files, upload_file1, upload_file2)
-        """
-        output = await compare_files(upload_file1, upload_file2)
-        output_json = convert_output_to_json(output)
-        expected_response_path = os.path.join(current_dir, "expected_results", "cross_type_comparison_result.json")
-
-        
-        with open(expected_response_path, "r") as expected_response_json:
-            expected_response = json.load(expected_response_json)
-            self.assertDictEqual(output_json, expected_response)
-        """
 
    
 def create_upload_file_from_local(file_path: str) -> UploadFile:
-    # Open the local file in binary read mode
         with open(file_path, "rb") as f:
-            # Read the file content
             file_content = BytesIO(f.read())
 
-        # Create and return an UploadFile instance
         return UploadFile(filename=file_path.split("\\")[-1], file=file_content)
     
-
-def create_comparison_file_from_local(file_path: str) -> UploadFile:
-    # Open the local file in binary read mode
-    upload_file = create_upload_file_from_local(file_path)
-    comparison_file = generate_comparison_file(upload_file)
-    return comparison_file

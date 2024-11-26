@@ -16,8 +16,8 @@ def health_check():
     return {"Health": "Sucessful"}
 
 
-@app.post("/upload")
-async def upload_files(
+@app.post("/compare")
+async def compare_files(
     file1: UploadFile = File(...), 
     file2: UploadFile = File(...)
 ):
@@ -27,7 +27,6 @@ async def upload_files(
             {"error": "Both files must have valid filenames"}, status_code=400
         ) 
     
-
     file1_obj = await generate_comparison_file(file1)
     file2_obj = await generate_comparison_file(file2)
 
@@ -87,7 +86,6 @@ async def generate_comparison_file(file: UploadFile):
     else:
         file_content = await file.read()
         text = file_content.decode("utf-8")
-
 
     file_obj = ComparisonFile(file.filename, text)
 

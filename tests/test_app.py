@@ -1,8 +1,8 @@
 import importlib
 from unittest import TestCase
-from fastapi import UploadFile
+from fastapi import UploadFile, HTTPException
 from io import BytesIO
-from src.main import upload_files, generate_comparison_file, convert_output_to_json
+from src.main import compare_files, generate_comparison_file, convert_output_to_json
 from src.model.compare_service import CompareService
 import os
 import asyncio
@@ -24,90 +24,89 @@ class AppTests(unittest.IsolatedAsyncioTestCase):
         current_dir = os.path.dirname(__file__)
         file1_path =  os.path.join(current_dir, "test_files",  "text", "text_file1.txt")
         file2_path =  os.path.join(current_dir, "test_files", "text", "text_file2.txt")
-        file1 = await create_comparison_file_from_local(file1_path)
-        file2 = await create_comparison_file_from_local(file2_path)
 
-        output = CompareService.compare(file1, file2)
-        output_json = convert_output_to_json(output)
+        upload_file1 = create_upload_file_from_local(file1_path)
+        upload_file2 = create_upload_file_from_local(file2_path)
+        output = await compare_files(upload_file1, upload_file2)
+        
         expected_response_path = os.path.join(current_dir, "expected_Results", "text_comparison_result.json")
 
         with open(expected_response_path, "r") as expected_response_json:
             expected_response = json.load(expected_response_json)
-            self.assertDictEqual(output_json, expected_response)
+            self.assertDictEqual(output, expected_response)
 
     async def test_pdf_compare(self):
 
         current_dir = os.path.dirname(__file__)
         file1_path =  os.path.join(current_dir, "test_files",  "pdf", "pdf_file1.pdf")
         file2_path =  os.path.join(current_dir, "test_files", "pdf", "pdf_file2.pdf")
-        file1 = await create_comparison_file_from_local(file1_path)
-        file2 = await create_comparison_file_from_local(file2_path)
 
-        output = CompareService.compare(file1, file2)
-        output_json = convert_output_to_json(output)
+        upload_file1 = create_upload_file_from_local(file1_path)
+        upload_file2 = create_upload_file_from_local(file2_path)
+        output = await compare_files(upload_file1, upload_file2)
+
         expected_response_path = os.path.join(current_dir, "expected_results", "pdf_comparison_result.json")
         
         with open(expected_response_path, "r") as expected_response_json:
             expected_response = json.load(expected_response_json)
-            self.assertDictEqual(output_json, expected_response)
+            self.assertDictEqual(output, expected_response)
 
     async def test_python_compare(self):
 
         current_dir = os.path.dirname(__file__)
         file1_path =  os.path.join(current_dir, "test_files",  "python", "python_file1.py")
         file2_path =  os.path.join(current_dir, "test_files", "python", "python_file2.py")
-        file1 = await create_comparison_file_from_local(file1_path)
-        file2 = await create_comparison_file_from_local(file2_path)
+        
+        upload_file1 = create_upload_file_from_local(file1_path)
+        upload_file2 = create_upload_file_from_local(file2_path)
+        output = await compare_files(upload_file1, upload_file2)
 
-        output = CompareService.compare(file1, file2)
-        output_json = convert_output_to_json(output)
         expected_response_path = os.path.join(current_dir, "expected_results", "python_comparison_result.json")
-
+        
         with open(expected_response_path, "r") as expected_response_json:
             expected_response = json.load(expected_response_json)
-            self.assertDictEqual(output_json, expected_response)
+            self.assertDictEqual(output, expected_response)
 
     async def test_typescript_compare(self):
 
         current_dir = os.path.dirname(__file__)
         file1_path =  os.path.join(current_dir, "test_files",  "typescript", "ts_file1.ts")
         file2_path =  os.path.join(current_dir, "test_files", "typescript", "ts_file2.ts")
-        file1 = await create_comparison_file_from_local(file1_path)
-        file2 = await create_comparison_file_from_local(file2_path)
+        
+        upload_file1 = create_upload_file_from_local(file1_path)
+        upload_file2 = create_upload_file_from_local(file2_path)
+        output = await compare_files(upload_file1, upload_file2)
 
-        output = CompareService.compare(file1, file2)
-        output_json = convert_output_to_json(output)
         expected_response_path = os.path.join(current_dir, "expected_results", "typescript_comparison_result.json")
-
+        
         with open(expected_response_path, "r") as expected_response_json:
             expected_response = json.load(expected_response_json)
-            self.assertDictEqual(output_json, expected_response)
+            self.assertDictEqual(output, expected_response)
 
     async def test_cross_type_compare(self):
 
         current_dir = os.path.dirname(__file__)
         file1_path =  os.path.join(current_dir, "test_files",  "pdf", "pdf_file2.pdf")
         file2_path =  os.path.join(current_dir, "test_files", "typescript", "ts_file2.ts")
-        file1 = await create_comparison_file_from_local(file1_path)
-        file2 = await create_comparison_file_from_local(file2_path)
+        
+        upload_file1 = create_upload_file_from_local(file1_path)
+        upload_file2 = create_upload_file_from_local(file2_path)
+        output = await compare_files(upload_file1, upload_file2)
 
-        output = CompareService.compare(file1, file2)
-        output_json = convert_output_to_json(output)
         expected_response_path = os.path.join(current_dir, "expected_results", "cross_type_comparison_result.json")
 
         with open(expected_response_path, "r") as expected_response_json:
             expected_response = json.load(expected_response_json)
-            self.assertDictEqual(output_json, expected_response)
+            self.assertDictEqual(output, expected_response)
 
     async def test_same_file_compare(self):
 
         current_dir = os.path.dirname(__file__)
         file1_path =  os.path.join(current_dir, "test_files", "typescript", "ts_file2.ts")
-        file1 = await create_comparison_file_from_local(file1_path)
-        file2 = file1
-
-        output = CompareService.compare(file1, file2)
-        output_json = convert_output_to_json(output)
+        
+        upload_file1 = create_upload_file_from_local(file1_path)
+        upload_file2 = create_upload_file_from_local(file1_path)
+        output = await compare_files(upload_file1, upload_file2)
 
         expected_response = {
             "num_changed_sections": 0,
@@ -121,7 +120,34 @@ class AppTests(unittest.IsolatedAsyncioTestCase):
             ],
             "changed_sections": []
         }
-        self.assertDictEqual(output_json, expected_response)
+        self.assertDictEqual(output, expected_response)
+
+    async def test_invalid_format(self):
+
+        current_dir = os.path.dirname(__file__)
+        file1_path =  os.path.join(current_dir, "test_files",  "pdf", "pdf_file2.pdf")
+        file2_path =  os.path.join(current_dir, "test_files", "invalid_format", "test_file1.doc")
+        upload_file1 = create_upload_file_from_local(file1_path)
+        upload_file2 = create_upload_file_from_local(file2_path)
+
+        with self.assertRaises(HTTPException) as context:
+            await compare_files(upload_file1, upload_file2)
+
+        #file1 = await create_comparison_file_from_local(file1_path)
+        #file2 = await create_comparison_file_from_local(file2_path)
+
+        #output = CompareService.compare(file1, file2)
+        #self.assertRaises(HTTPException, compare_files, upload_file1, upload_file2)
+        """
+        output = await compare_files(upload_file1, upload_file2)
+        output_json = convert_output_to_json(output)
+        expected_response_path = os.path.join(current_dir, "expected_results", "cross_type_comparison_result.json")
+
+        
+        with open(expected_response_path, "r") as expected_response_json:
+            expected_response = json.load(expected_response_json)
+            self.assertDictEqual(output_json, expected_response)
+        """
 
    
 def create_upload_file_from_local(file_path: str) -> UploadFile:

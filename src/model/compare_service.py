@@ -1,11 +1,6 @@
 from src.model.comparison_file import ComparisonFile
-import io
 import difflib
-import re
 from src.model.file_change_models import FileChange, FileChangeComparison, ComparisonServiceOutput
-import json
-#from abc import ABC, abstractmethod
-#class compare_service(ABC):
 class CompareService():
 
 
@@ -20,8 +15,6 @@ class CompareService():
                                     fromfile=compfile1.filename, tofile=compfile2.filename, lineterm='')
         
         # Join the diff result and return it
-
-        
         combined_diff = ""
         for specific_diff in diff:
              combined_diff += specific_diff + "\n"
@@ -31,26 +24,18 @@ class CompareService():
             return ComparisonServiceOutput(filename_format, [] , 0, 0)
 
         diff_result = combined_diff
-        print("diff_result")
-        print(diff_result)
+
         diffsplit = diff_result.split("@@")
         trimmed_diffsplit = []
         for item in diffsplit:
             if item != '':
                 trimmed_diffsplit.append(item)
         
-        print("diffsplit 1")
         diffsplit = trimmed_diffsplit
-        for diff in diffsplit:
-            print(diff)
         filenames = diffsplit.pop(0)
         total_differences = []
-        pattern = r"-(\d+),(\d+) \+(\d+),(\d+)"
 
 
-
-        print("diffsplit 2")
-        print(diffsplit)
         total_file1_lines_affected = 0
         total_file2_lines_affected = 0
         for i in range (0, len(diffsplit), 2):
@@ -59,9 +44,6 @@ class CompareService():
             
             change_line_readings = diffsplit[i]
             change_line_readings = change_line_readings.strip()
-            print(i)
-            print("line changes")
-            print(change_line_readings)
             change_line_readings.replace("-", '')
             change_line_split = change_line_readings.split('+')
             #match = re.match(pattern, change_line_readings)

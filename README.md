@@ -4,5 +4,6 @@
 3. Once pipenv is successfully install, run pipenv sync to ensure the packages will work properly
 4. Run pipenv shell in the repo directory
 5. In the pipenv shell, run the command <uvicorn src.main:app --reload>. You should see a message  Uvicorn running on http://127.0.0.1:8000. This means that the API is running locally
-6. You should be able to verify the api is running locally by hitting http://127.0.0.1:8000/{endpoint}
-
+6. You should be able to verify the api is running locally by going to http://127.0.0.1:8000/ in your browser. If successful, you'll see the resonse pauload of {
+"Sucessful": "Connection"
+}

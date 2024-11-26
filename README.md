@@ -8,7 +8,7 @@
 "Sucessful": "Connection"
 }
 
-#Prod Checklist
+#Prod Checklist \
 #Deployment
 1. The repo already includes code mainitng a CI/CD workflow for deploying the API as an ECS task in AWS. To ensure that the deployments run successfully, follow these steps
   Update your repo's secret values to include the proper AWS creds
@@ -23,5 +23,7 @@ After creating all of this infra and configuring github secrets, you should be a
 
 #Testing
 These are alreayd unittests that 
-#Logging
-#Maintainng Uptime
+#Observability
+#Resiliency
+#Security
+#Disaster Recovery

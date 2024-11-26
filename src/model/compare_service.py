@@ -9,8 +9,10 @@ class CompareService():
 
         diff = difflib.unified_diff(compfile1.text.splitlines(), compfile2.text.splitlines(), 
                                     fromfile=compfile1.filename, tofile=compfile2.filename, lineterm='')
+        
         combined_diff = ""
         filename_format = f"--- {compfile1.filename}\n+++ {compfile2.filename}\n"
+
         for specific_diff in diff:
              combined_diff += specific_diff + "\n"
 

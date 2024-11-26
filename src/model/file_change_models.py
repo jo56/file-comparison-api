@@ -1,4 +1,3 @@
-
 class FileChange:
     
     starting_line: int

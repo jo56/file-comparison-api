@@ -1,3 +1,3 @@
 Use command 
-uvicorn main:app --reload 
+uvicorn src.main:app --reload 
 to load it

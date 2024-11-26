@@ -27,26 +27,12 @@ async def upload_files(
             {"error": "Both files must have valid filenames"}, status_code=400
         ) 
     
-    """
-    
-    file1_content = await file1.read()
-    file2_content = await file2.read()
 
-    file1_text = file1_content.decode("utf-8")
-    file2_text = file2_content.decode("utf-8")
-
-
-    file1_obj = ComparisonFile(file1.filename, file1_text)
-    file2_obj = ComparisonFile(file2.filename, file2_text)
-    """
-
-    file1_obj = generate_comparison_file(file1)
-    file2_obj = generate_comparison_file(file2)
-    
+    file1_obj = await generate_comparison_file(file1)
+    file2_obj = await generate_comparison_file(file2)
 
     output = CompareService.compare(file1_obj, file2_obj)
 
-    print(output)
     comparison_list = output.changes
     file_index = output.filename_index
 

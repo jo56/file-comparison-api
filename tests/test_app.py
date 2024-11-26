@@ -19,8 +19,6 @@ class AppTests(unittest.IsolatedAsyncioTestCase):
     def tearDownClass(cls) -> None:
         pass
 
-    maxDiff = None
-
     async def test_txt_compare(self):
 
         current_dir = os.path.dirname(__file__)
@@ -133,6 +131,7 @@ class AppTests(unittest.IsolatedAsyncioTestCase):
             ],
             "changed_sections": []
         }
+
         expected_file_index = [f"--- {file1_path}", f"+++ {file1_path}"]
         expected_response["file_index"] = expected_file_index
         self.assertDictEqual(output, expected_response)

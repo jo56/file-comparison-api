@@ -20,4 +20,4 @@
   f. Configure route 53 to use a custom domain if you don't want to hit the default load balancer
 4. After creating all of this infra and configuring github secrets, you should be able to access the endpoint in a deployed setting by hitting the DNS name instead of http://127.0.0.1:8000
 
-#Additional Pr0d Checklist Stuff
+#Additional Prod Checklist Stuff

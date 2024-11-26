@@ -7,3 +7,5 @@
 6. You should be able to verify the api is running locally by going to http://127.0.0.1:8000/ in your browser. If successful, you'll see the resonse payload of {
 "Sucessful": "Connection"
 }
+
+#Production Readiness Checklist

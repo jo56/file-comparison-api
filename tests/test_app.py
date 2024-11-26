@@ -67,7 +67,55 @@ class AppTests(unittest.IsolatedAsyncioTestCase):
             }
         ]
     }
-        print(expected_response)
+        
+        self.assertDictEqual(output_json, expected_response)
+
+    async def test_pdf_compare(self):
+
+        current_dir = os.path.dirname(__file__)
+        
+        file1_path =  os.path.join(current_dir, "test_files",  "text", "text_file1.txt")
+        file2_path =  os.path.join(current_dir, "test_files", "text", "text_file2.txt")
+        file1 = await create_comparison_file_from_local(file1_path)
+        file2 = await create_comparison_file_from_local(file2_path)
+
+        output = CompareService.compare(file1, file2)
+
+        output_json = convert_output_to_json(output)
+
+        expected_response = {
+        "num_changed_sections": 1,
+        "total_lines_affected": {
+            "file1": 6,
+            "file2": 0
+        },
+        "file_index": [
+            "--- text_file1.txt",
+            "+++ text_file2.txt"
+        ],
+        "changed_sections": [
+            {
+                "file1": {
+                    "starting_line": "-1",
+                    "line_total": "6",
+                    "exclusive_lines": [
+                        "gsagsfbsd",
+                        "",
+                        "43ghh",
+                        "7",
+                        "75",
+                        "46yy45"
+                    ]
+                },
+                "file2": {
+                    "starting_line": "0",
+                    "line_total": "0",
+                    "exclusive_lines": []
+                },
+                "full_text_difference": "\n-gsagsfbsd\n-\n-43ghh\n-7\n-75\n-46yy45\n"
+            }
+        ]
+    }
         
         self.assertDictEqual(output_json, expected_response)
 

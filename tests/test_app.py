@@ -19,6 +19,8 @@ class AppTests(unittest.IsolatedAsyncioTestCase):
     def tearDownClass(cls) -> None:
         pass
 
+    maxDiff = None
+
     async def test_txt_compare(self):
 
         current_dir = os.path.dirname(__file__)

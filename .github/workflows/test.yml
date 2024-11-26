@@ -25,7 +25,7 @@ jobs:
         run: python -m pip install --upgrade pipenv wheel
 
       - name: Install dependencies
-        run: pipenv install --deploy --dev
+        run: pipenv install --dev
 
       - name: Run test suite
         run: pipenv run python -m unittest discover

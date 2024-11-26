@@ -8,7 +8,8 @@
 "Sucessful": "Connection"
 }
 
-#How to run in production
+#Prod Checklist
+#Deployment
 1. The repo already includes code mainitng a CI/CD workflow for deploying the API as an ECS task in AWS. To ensure that the deployments run successfully, follow these steps
   Update your repo's secret values to include the proper AWS creds
 2. Set up infrastructe in AWS. Though updating these should be automatic on push, you'll still need to make sure that that the AWS inra is set up in the first place. Configure the following infra using he names provided in the 'deploy.yml' file. Feel free to consult for AWS docs as for how to set these up. You should be able to use th eexisitng resources to fill parameters when creating these services. Create the first go arounds for this infa in this order\
@@ -18,6 +19,9 @@
   d. ECS Service \
   e. Load Balancer (Can be created as a part of the ECS Service setup) \
   f. Configure route 53 to use a custom domain if you don't want to hit the default load balancer
-4. After creating all of this infra and configuring github secrets, you should be able to access the endpoint in a deployed setting by hitting the DNS name instead of http://127.0.0.1:8000
+After creating all of this infra and configuring github secrets, you should be able to access the endpoint in a deployed setting by hitting the DNS name instead of http://127.0.0.1:8000. In addition, subsequent commits to the main branch should automatically trigger redpeloyments
 
-#Additional Prod Checklist Stuff
+#Testing
+These are alreayd unittests that 
+#Logging
+#Maintainng Uptime

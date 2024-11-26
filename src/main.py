@@ -1,6 +1,6 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
-from src.model.compare_service import CompareService
+from src.model.compare_service import CompareService, ComparisonServiceOutput
 from src.model.comparison_file import ComparisonFile
 import json
 from PyPDF2 import PdfReader
@@ -33,13 +33,18 @@ async def upload_files(
 
     output = CompareService.compare(file1_obj, file2_obj)
 
+    output_json = convert_output_to_json(output)
+
+    return output_json
+
+def convert_output_to_json(output: ComparisonServiceOutput):
     comparison_list = output.changes
     file_index = output.filename_index
 
     changes_list = []
 
     for change in comparison_list:
-        {
+        changes_json = {
             "file1" : {
                 "starting_line": change.file1.starting_line,
                 "line_total": change.file1.total_lines,
@@ -52,7 +57,7 @@ async def upload_files(
             },
             "full_text_difference": change.full_text_difference
         }
-        changes_list.append(change)
+        changes_list.append(changes_json)
 
     file_index_split = file_index.split('\n')
     file_index_split.remove('')
@@ -68,6 +73,7 @@ async def upload_files(
     }
 
     return output_json
+
 
 async def generate_comparison_file(file: UploadFile):
     if not file.filename.endswith((".pdf", ".txt", ".py", ".ts")):

@@ -11,8 +11,8 @@
     "changed_sections": [
         {
             "file1": {
-                "starting_line": "-1",
-                "line_total": "19",
+                "starting_line": 1,
+                "line_total": 19,
                 "exclusive_lines": [
                     "// This example requires the Visualization library. Include the ",
                     "libraries=visualization",
@@ -35,8 +35,8 @@
                 ]
             },
             "file2": {
-                "starting_line": "1",
-                "line_total": "6",
+                "starting_line": 1,
+                "line_total": 6,
                 "exclusive_lines": [
                     "const oauth = {",
                     "    // Domain name",

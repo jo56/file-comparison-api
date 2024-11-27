@@ -49,7 +49,6 @@ def  generate_comparison_for_section(changed_section: str, i: int) -> FileChange
         change_line_readings = change_line_readings.strip()
         change_line_readings = change_line_readings.replace("-", '')
         change_line_split = change_line_readings.split('+')
-        print(change_line_readings)
 
         start_old, count_old = get_line_change(change_line_split[0])
         start_new, count_new = get_line_change(change_line_split[1])

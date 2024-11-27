@@ -17,7 +17,7 @@ The primary prupose of this api is to use the ```/compare_files``` endpoint to c
 ## Deployment
 The repo already includes for code maintaining a CI/CD workflow for deploying the API as an ECS task in AWS. To ensure that the deployment runs successfully, follow these steps:
   1. Update your repo's secret values to include proper AWS creds
-  2. Set up the following infrastructure in AWS. Though updating these should be automatic on push, you'll still need to make sure that that the AWS infra is set up in the first place. Configure the following infra using the names provided in the ```deploy.yml``` file. Feel free to consult for AWS docs as for how to set these up. You should be able to use the exisitng resources to fill parameters when creating these services. \
+  2. Set up the following infrastructure in AWS. Though updating these should be automatic on push, you'll still need to make sure that that the AWS infra is set up in the first place. Configure the following infra using the names provided in the ```deploy.yml``` file. Feel free to consult for AWS docs as for how to set these up. You should be able to use the exisitng resources to fill parameters when creating these services. 
      
    Create the first go arounds for this infa in this order: \
    a. Cloudwatch log group \

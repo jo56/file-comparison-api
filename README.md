@@ -3,7 +3,7 @@ The primary purpose of this api is to use the ```/compare_files``` endpoint to c
 # How to run locally
 1. Make sure you have Python 3.13 installed and configured. You can use pyenv to configure what version of python you have installed for the repo directory on your machine
 2. Make sure you have pipenv installed and configured. If you do not have pipenv installed, try running the command ```pip install pipenv```
-3. Once pipenv is successfully installed, run ```pipenv sync``` to ensure the packages will work properly
+3. Once pipenv is successfully installed, run ```pipenv sync``` in your repo directory to ensure the packages will work properly
 4. Run ```pipenv shell``` in the repo directory. You should see a shell activate in your directory
 5. In the pipenv shell, run the command ```uvicorn src.main:app --reload```. You should see a message  ``Uvicorn running on http://127.0.0.1:8000``. This means that the API is running locally
 6. You should be able to verify the api is running locally by going to http://127.0.0.1:8000/ in your browser. If successful, you'll see the resonse payload of ```{

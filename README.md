@@ -2,7 +2,7 @@ The primary purpose of this api is to use the ```/compare_files``` endpoint to c
 
 # How to run locally
 1. Make sure you have Python 3.13 installed and configured. You can use pyenv to configure what version of python you have installed for the repo directory on your machine
-2. Make sure you have pipenv installed and configred. If you do not have pipenv installed, try running the command ```pip install pipenv```
+2. Make sure you have pipenv installed and configured. If you do not have pipenv installed, try running the command ```pip install pipenv```
 3. Once pipenv is successfully installed, run ```pipenv sync``` to ensure the packages will work properly
 4. Run ```pipenv shell``` in the repo directory. You should see a shell activate in your directory
 5. In the pipenv shell, run the command ```uvicorn src.main:app --reload```. You should see a message  ``Uvicorn running on http://127.0.0.1:8000``. This means that the API is running locally
@@ -17,12 +17,12 @@ The primary purpose of this api is to use the ```/compare_files``` endpoint to c
 ## Deployment
 The repo already includes for code maintaining a CI/CD workflow for deploying the API as an ECS service in AWS. To ensure that the deployment runs successfully, follow these steps:
   1. Update your repo's secret values to include proper AWS creds
-  2. Set up the following infrastructure in AWS. Though updating these should be automatic on push, you'll still need to make sure that that the AWS infra is set up in the first place. Configure the following infra using the names provided in the ```deploy.yml``` or ```ecs-task-def.json``` files. Feel free to consult for AWS docs as for how to set these up. You should be able to use the existing resources to fill in parameters when creating these services. 
+  2. Set up the following infrastructure in AWS. Though updating these should be automatic on push, you'll still need to make sure that the AWS infra is set up in the first place. Configure the following infra using the information provided in the ```deploy.yml``` and ```ecs-task-def.json``` files. Feel free to consult for AWS docs as for how to set these up. 
      
-   Create the first go arounds for this infa in this order: \
+   Create the infa in this order: \
    a. Cloudwatch log group \
    b. ECR Repository \
-   c. ECS Task Definition \
+   c. ECS Task Definition (If it doesn't let you create a task def because there isn't an image in the new repository, you can configure a workflow that just does the image upload portion of ```deploy.yml```)\
    d. ECS Service Cluster \
    e. ECS Service \
    f. Load Balancer (Can be created as a part of the ECS Service setup) \
@@ -30,7 +30,7 @@ The repo already includes for code maintaining a CI/CD workflow for deploying th
    
    You can create all of these automatically using terraform if you're willing to learn its setup. Otherwise, it shouldn't be too hard to set up manually 
 
-After creating all of this infra and configuring github secrets, you should be able to access the endpoint in a deployed setting by hitting the DNS name of the load balancer (or custom domain if you so choose) instead of http://127.0.0.1:8000. In addition, subsequent commits to the main branch should automatically trigger redpeloyments
+After creating all of this infra and configuring github secrets, you should be able to access the endpoint in a deployed setting by hitting the DNS name of the load balancer (or custom domain if you so choose) instead of http://127.0.0.1:8000. In addition, subsequent commits to the main branch should automatically trigger updated redpeloyments
 
 ## Testing
 These are already unit tests that are included as a part of this repo, which are configured to automatically run on each commit. If you were to expand this testing into a prod setting, it could be worth setting up an integration tests for testing the process of actually hitting the API endpoint, intead of just testing the logic that happens when the API is hit.  
@@ -45,4 +45,4 @@ ECS autoscales the tasks it is running for a service, so a random glitch causing
 The load balancer connection by default will use HTTP for its connection. For best security practices, look into Amazon Certificate Manager and use a certificate while configuring the load balancer to ensure the connection is using HTTPS. It is also recommended to add a security measure to the endpoint itself, ensuring that the endpoint can only be hit if one has a proper credential like a bearer token. There is also the precaution to  make sure that different users' files are not accidentally shared with each other. Right now the lack of client-facing logging and lack of in memory storage means that this is less serious of a concern. However, any attempt to store the data beyond the immediate request should be properly secured. 
 
 ## Disaster Recovery
-Fortunately this endpoint does not need to worry about long term storage for the files it is comparing. The existing infrastructue should be able to be shut down and spun up again on a whim if deemed necessary. However, if this were to be updated to start storing files, the setup for storing the files should have safeguards incorporated to ensure that the data will not me. This was also covered under resiliency, but using a terrform setup to automatically deploy all of the relevant infrastructure on the chance that the existing infra is deleted somehow. This could allow one to spin up all of the important infrasture with one command, allowing the CI/CD process within this repo to continue smoothly
+Fortunately this endpoint does not need to worry about long term storage for the files it is comparing. The existing infrastructure should be able to be shut down and spun up again on a whim if deemed necessary. However, if this were to be updated to start storing files, the setup for storing the files should have safeguards incorporated to ensure that the data will not me. This was also covered under resiliency, but using a terrform setup to automatically deploy all of the relevant infrastructure on the chance that the existing infra is deleted somehow. This could allow one to spin up all of the important infrasture with one command, allowing the CI/CD process within this repo to continue smoothly

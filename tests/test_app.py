@@ -19,7 +19,7 @@ class AppTests(unittest.IsolatedAsyncioTestCase):
     def tearDownClass(cls) -> None:
         pass
 
-    async def test_txt_compare(self):
+    async def test_md_compare(self):
 
         current_dir = os.path.dirname(__file__)
         file1_path =  os.path.join(current_dir, "test_files",  "text", "text_file1.md")

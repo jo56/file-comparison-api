@@ -1,4 +1,4 @@
-The primary purpose of this api is to use the ```/compare_files``` endpoint to compare two files and detect changes within the contents of the files. It supports ```.py```, ```.txt```, ```.pdf```, and ```.ts```, and can allow comparison between files with two different extensions
+The primary purpose of this api is to use the ```/compare_files``` endpoint to compare two files and detect changes within the contents of the files. It supports ```.py```, ```.md```, ```.pdf```, and ```.ts```, and can allow comparison between files with two different extensions
 
 # How to run locally
 1. Make sure you have Python 3.13 installed and configured. You can use pyenv to configure what version of python you have installed for the repo directory on your machine

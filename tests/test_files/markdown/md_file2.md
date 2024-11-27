@@ -1,0 +1,1 @@
+The primary purpose of this api is to use the ```/compare_files``` endpoint to compare two files and detect changes within the contents of the files. It supports ```.py```, ```.md```, ```.pdf```, and ```.ts```, and can allow comparison between files with two different extensions

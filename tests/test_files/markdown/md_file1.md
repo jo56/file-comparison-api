@@ -1,6 +1,1 @@
-gsagsfbsd
-
-43ghh
-7
-75
-46yy45
+ "The primary purpose of this api is to use the ```/compare_files``` endpoint to compare two files

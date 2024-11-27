@@ -11,8 +11,8 @@
     "changed_sections": [
         {
             "file1": {
-                "starting_line": "-4",
-                "line_total": "14",
+                "starting_line": 4,
+                "line_total": 14,
                 "exclusive_lines": [
                     "    ",
                     "        with open(file1, 'r') as f1, open(file2, 'r') as f2:",
@@ -21,8 +21,8 @@
                 ]
             },
             "file2": {
-                "starting_line": "4",
-                "line_total": "12",
+                "starting_line": 4,
+                "line_total": 12,
                 "exclusive_lines": [
                     "    x",
                     "        "
@@ -32,13 +32,13 @@
         },
         {
             "file1": {
-                "starting_line": "-26",
-                "line_total": "5",
+                "starting_line": 26,
+                "line_total": 5,
                 "exclusive_lines": []
             },
             "file2": {
-                "starting_line": "24",
-                "line_total": "8",
+                "starting_line": 24,
+                "line_total": 8,
                 "exclusive_lines": [
                     "        with open(file1, 'r') as f1, open(file2, 'r') as f2:",
                     "            file1_lines = f1.readlines()",

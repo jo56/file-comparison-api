@@ -47,8 +47,9 @@ def  generate_comparison_for_section(changed_section: str, i: int) -> FileChange
         
         change_line_readings = changed_section[i]
         change_line_readings = change_line_readings.strip()
-        change_line_readings.replace("-", '')
+        change_line_readings = change_line_readings.replace("-", '')
         change_line_split = change_line_readings.split('+')
+        print(change_line_readings)
 
         start_old, count_old = get_line_change(change_line_split[0])
         start_new, count_new = get_line_change(change_line_split[1])
@@ -83,10 +84,10 @@ def filter_array(input_array: list) -> list:
             filtered_array.append(item)
     return filtered_array
 
-def  get_line_change(input_string: str) -> tuple[str, str]:
+def  get_line_change(input_string: str) -> tuple[int, int]:
         if ',' not in input_string:
-            return input_string, 1
+            return int(input_string.strip()), 1
         else:
             comma_split = input_string.split(',')
             split_second = comma_split[1].strip()
-            return comma_split[0], split_second
+            return int(comma_split[0].strip()), int(split_second)

@@ -11,8 +11,8 @@
     "changed_sections": [
         {
             "file1": {
-                "starting_line": "-1",
-                "line_total": "16",
+                "starting_line": 1,
+                "line_total": 16,
                 "exclusive_lines": [
                     "let map: google.maps.Map, heatmap: google.maps.visualization.HeatmapLayer;",
                     "function initMap(): void {",
@@ -31,8 +31,8 @@
                 ]
             },
             "file2": {
-                "starting_line": "1",
-                "line_total": "6",
+                "starting_line": 1,
+                "line_total": 6,
                 "exclusive_lines": [
                     "const oauth = {",
                     "    // Domain name",

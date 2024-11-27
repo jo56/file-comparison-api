@@ -1,0 +1,30 @@
+{
+    "num_changed_sections": 1,
+    "total_lines_affected": {
+        "file1": 1,
+        "file2": 1
+    },
+    "file_index": [
+        "--- md_file1.md",
+        "+++ md_file2.md"
+    ],
+    "changed_sections": [
+        {
+            "file1": {
+                "starting_line": 1,
+                "line_total": 1,
+                "exclusive_lines": [
+                    " \"The primary purpose of this api is to use the ```/compare_files``` endpoint to compare two files"
+                ]
+            },
+            "file2": {
+                "starting_line": 1,
+                "line_total": 1,
+                "exclusive_lines": [
+                    "The primary purpose of this api is to use the ```/compare_files``` endpoint to compare two files and detect changes within the contents of the files. It supports ```.py```, ```.md```, ```.pdf```, and ```.ts```, and can allow comparison between files with two different extensions"
+                ]
+            },
+            "full_text_difference": "\n- \"The primary purpose of this api is to use the ```/compare_files``` endpoint to compare two files\n+The primary purpose of this api is to use the ```/compare_files``` endpoint to compare two files and detect changes within the contents of the files. It supports ```.py```, ```.md```, ```.pdf```, and ```.ts```, and can allow comparison between files with two different extensions\n"
+        }
+    ]
+}

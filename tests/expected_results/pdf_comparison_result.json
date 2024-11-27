@@ -1,7 +1,7 @@
 {
     "num_changed_sections": 1,
     "total_lines_affected": {
-        "file1": 0,
+        "file1": 1,
         "file2": 19
     },
     "file_index": [
@@ -11,9 +11,11 @@
     "changed_sections": [
         {
             "file1": {
-                "starting_line": 0,
-                "line_total": 0,
-                "exclusive_lines": []
+                "starting_line": 1,
+                "line_total": 1,
+                "exclusive_lines": [
+                    "test pdf"
+                ]
             },
             "file2": {
                 "starting_line": 1,
@@ -40,7 +42,7 @@
                     "}P"
                 ]
             },
-            "full_text_difference": "\n+// This example requires the Visualization library. Include the \n+libraries=visualization\n+// parameter when you first load the API. For example:\n+// <script \n+src=\"https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualizatio\n+n\">\n+let map: google.maps.Map, heatmap: google.maps.visualization.HeatmapLayer;\n+function initMap(): void {\n+  map = new google.maps.Map(document.getElementById(\"map\") as HTMLElement, {\n+    mapTypeId: \"satellite\",\n+  });\n+  heatmap = new google.maps.visualization.HeatmapLayer({\n+    data: getPoints(),\n+    map: map,\n+  });\n+}\n+function toggleHeatmap() {\n+  heatmap.setMap(heatmap.getMap() ? null : map);\n+}P\n"
+            "full_text_difference": "\n-test pdf\n+// This example requires the Visualization library. Include the \n+libraries=visualization\n+// parameter when you first load the API. For example:\n+// <script \n+src=\"https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualizatio\n+n\">\n+let map: google.maps.Map, heatmap: google.maps.visualization.HeatmapLayer;\n+function initMap(): void {\n+  map = new google.maps.Map(document.getElementById(\"map\") as HTMLElement, {\n+    mapTypeId: \"satellite\",\n+  });\n+  heatmap = new google.maps.visualization.HeatmapLayer({\n+    data: getPoints(),\n+    map: map,\n+  });\n+}\n+function toggleHeatmap() {\n+  heatmap.setMap(heatmap.getMap() ? null : map);\n+}P\n"
         }
     ]
 }

@@ -1,7 +1,7 @@
 The primary prupose of this api is to use the ```/compare_files``` endpoint to compare two files and detect changes within the contents of the files. It supports ```.py```, ```.txt```, ```.pdf```, and ```.ts```, and can allow comparison between files with two different extensions
 
 # How to run locally
-1. Make sure you have Python 3.13 installed and configured. You can use ```pyenv``` to configure what version of python you have installed for the repo directory on your machine
+1. Make sure you have Python 3.13 installed and configured. You can use pyenv to configure what version of python you have installed for the repo directory on your machine
 2. Make sure you have pipenv installed and configred. If you do not have pipenv installed, try running the command ```pip install pipenv```
 3. Once pipenv is successfully installed, run ```pipenv sync``` to ensure the packages will work properly
 4. Run ```pipenv shell``` in the repo directory. You should see a shell activate in your directory

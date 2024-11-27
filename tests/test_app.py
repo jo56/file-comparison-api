@@ -22,8 +22,8 @@ class AppTests(unittest.IsolatedAsyncioTestCase):
     async def test_md_compare(self):
 
         current_dir = os.path.dirname(__file__)
-        file1_path =  os.path.join(current_dir, "test_files",  "text", "text_file1.md")
-        file2_path =  os.path.join(current_dir, "test_files", "text", "text_file2.md")
+        file1_path =  os.path.join(current_dir, "test_files",  "markdown", "md_file1.md")
+        file2_path =  os.path.join(current_dir, "test_files", "markdown", "md_file2.md")
 
         upload_file1 = create_upload_file_from_local(file1_path)
         upload_file2 = create_upload_file_from_local(file2_path)

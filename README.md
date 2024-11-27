@@ -7,26 +7,29 @@
 6. You should be able to verify the api is running locally by going to http://127.0.0.1:8000/ in your browser. If successful, you'll see the resonse payload of {
 "Sucessful": "Connection"
 }
+The primary prupose of this api is to use the /compare endpoint to compare two files and detect changes within the ocntents of the files. It supports .py, .txt, .pdf, and .ts, and can allow comparison between files with two difference extensions\
+\
 
 #Prod Checklist \
 #Deployment
 1. The repo already includes code mainitng a CI/CD workflow for deploying the API as an ECS task in AWS. To ensure that the deployments run successfully, follow these steps
   Update your repo's secret values to include the proper AWS creds
 2. Set up infrastructe in AWS. Though updating these should be automatic on push, you'll still need to make sure that that the AWS inra is set up in the first place. Configure the following infra using he names provided in the 'deploy.yml' file. Feel free to consult for AWS docs as for how to set these up. You should be able to use th eexisitng resources to fill parameters when creating these services. Create the first go arounds for this infa in this order\
-   Cloudwatch log group \
-   ECR Repository \
-   ECS Task Definition \
-   ECS Service Cluster \
-   ECS Service \
-   Load Balancer (Can be created as a part of the ECS Service setup) \
-   Configure route 53 to use a custom domain if you don't want to hit the default load balancer
+   a. Cloudwatch log group \
+   b. ECR Repository \
+   c. ECS Task Definition \
+   d. ECS Service Cluster \
+   e. ECS Service \
+   f. Load Balancer (Can be created as a part of the ECS Service setup) \
+   g. Configure route 53 to use a custom domain if you don't want to hit the default load balancer\
 After creating all of this infra and configuring github secrets, you should be able to access the endpoint in a deployed setting by hitting the DNS name instead of http://127.0.0.1:8000. In addition, subsequent commits to the main branch should automatically trigger redpeloyments
 
 #Testing\
 These are alreayd unittests that 
 #Observability\
-The load balancer trgetr group should will be automatically pining the /health endpoint on a successful deployment, which allows us insight into current 
+The load balancer trgetr group should will be automatically pining the /health endpoint on a successful deployment, which allows us insight into the current healht status of the ECS deployment. This can be further configured to ping alerts depending on the current health status of the deployment. In addition, logging on theECS level and within the container gives us visibility into what is going on within the service
 #Resiliency\
+ECS autocscales
 #Security\
 #Disaster Recovery\
 Fortunately this endpoint does not need to worry about long term storage for the files it is comparing. The existing infrastructue should be able to be shut down and spun up again on a whim if deemed necessary. However, if this were to be updated to start storing files, the database setup it should be stored in should have safeguards incorporated to ensure that the data will not me 

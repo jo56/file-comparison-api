@@ -22,14 +22,15 @@ The primary prupose of this api is to use the /compare endpoint to compare two f
    e. ECS Service \
    f. Load Balancer (Can be created as a part of the ECS Service setup) \
    g. Configure route 53 to use a custom domain if you don't want to hit the default load balancer\
+   You can create all of htese automatically using terraform if you're willing to learn its setup. Otherwise, it shouldn't be too easy to set up manually \
 After creating all of this infra and configuring github secrets, you should be able to access the endpoint in a deployed setting by hitting the DNS name instead of http://127.0.0.1:8000. In addition, subsequent commits to the main branch should automatically trigger redpeloyments
 
 #Testing\
 These are alreayd unittests that 
 #Observability\
-The load balancer trgetr group should will be automatically pining the /health endpoint on a successful deployment, which allows us insight into the current healht status of the ECS deployment. This can be further configured to ping alerts depending on the current health status of the deployment. In addition, logging on theECS level and within the container gives us visibility into what is going on within the service
+The load balancer trgetr group should will be automatically pining the /health endpoint on a successful deployment, which allows us insight into the current healht status of the ECS deployment. This can be further configured to ping alerts depending on the current health status of the deployment. In addition, logging on the ECS level and within the container gives us visibility into what is going on within the service\
 #Resiliency\
-ECS autocscales
+ECS autocscales the tasks it is running for a service, so a random glitch causing the API tas to fail should just cause another ECS task to be spun up in its place, ensuring that the API won't be down for long. If you were to try to scale up this service, it would be recommended to create multiple ECS services that could act as potnetial backups in case something happens to the main service. CI/CD for these additional services would be easy 
 #Security\
 #Disaster Recovery\
 Fortunately this endpoint does not need to worry about long term storage for the files it is comparing. The existing infrastructue should be able to be shut down and spun up again on a whim if deemed necessary. However, if this were to be updated to start storing files, the database setup it should be stored in should have safeguards incorporated to ensure that the data will not me 

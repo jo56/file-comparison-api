@@ -2,13 +2,13 @@ The primary prupose of this api is to use the /compare endpoint to compare two f
 
 # How to run locally
 1. Make sure you have python 3.13 installed and configured. You can use pyenv to configure what version of python you have installed for the repo directory
-2. Make sure you have pipenv installed and configred. If you do not have pipenv installed, try running the command <pip install pipenv>
+2. Make sure you have pipenv installed and configred. If you do not have pipenv installed, try running the command ```pip install pipenv```
 3. Once pipenv is successfully installed, run pipenv sync to ensure the packages will work properly
 4. Run pipenv shell in the repo directory
-5. In the pipenv shell, run the command <uvicorn src.main:app --reload>. You should see a message  Uvicorn running on http://127.0.0.1:8000. This means that the API is running locally
-6. You should be able to verify the api is running locally by going to http://127.0.0.1:8000/ in your browser. If successful, you'll see the resonse payload of {
+5. In the pipenv shell, run the command ```uvicorn src.main:app --reload```. You should see a message  Uvicorn running on http://127.0.0.1:8000. This means that the API is running locally
+6. You should be able to verify the api is running locally by going to http://127.0.0.1:8000/ in your browser. If successful, you'll see the resonse payload of ```{
 "Sucessful": "Connection"
-}
+}```
 
 
 
@@ -18,7 +18,7 @@ The primary prupose of this api is to use the /compare endpoint to compare two f
 The repo already includes for code maintaining a CI/CD workflow for deploying the API as an ECS task in AWS. To ensure that the deployment runs successfully, follow these steps:
   1. Update your repo's secret values to include proper AWS creds
   2. Set up the following infrastructure in AWS:
-     Though updating these should be automatic on push, you'll still need to make sure that that the AWS infra is set up in the first place. Configure the following infra using the names provided in the 'deploy.yml' file. Feel free to consult for AWS docs as for how to set these up. You should be able to use the exisitng resources to fill parameters when creating these services.
+     Though updating these should be automatic on push, you'll still need to make sure that that the AWS infra is set up in the first place. Configure the following infra using the names provided in the ```deploy.yml``` file. Feel free to consult for AWS docs as for how to set these up. You should be able to use the exisitng resources to fill parameters when creating these services.
    Create the first go arounds for this infa in this order:
    a. Cloudwatch log group \
    b. ECR Repository \

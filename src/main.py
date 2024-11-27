@@ -75,9 +75,9 @@ def convert_output_to_json(output: ComparisonServiceOutput) -> dict:
 
 
 async def generate_comparison_file(file: UploadFile) -> ComparisonFile:
-    if not file.filename.endswith((".pdf", ".txt", ".py", ".ts")):
+    if not file.filename.endswith((".pdf", ".md", ".py", ".ts")):
         raise HTTPException(status_code=422, 
-                            detail="Invalid format. Only accepts .pdf, .txt, .py, and .ts")
+                            detail="Invalid format. Only accepts .pdf, .md, .py, and .ts")
     
     if file.filename.endswith(".pdf"):
         pdf_reader = PdfReader(file.file)

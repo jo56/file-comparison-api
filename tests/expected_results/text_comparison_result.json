@@ -5,8 +5,8 @@
         "file2": 0
     },
     "file_index": [
-        "--- text_file1.txt",
-        "+++ text_file2.txt"
+        "--- text_file1.md",
+        "+++ text_file2.md"
     ],
     "changed_sections": [
         {

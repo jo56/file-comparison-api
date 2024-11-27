@@ -33,7 +33,7 @@ After creating all of this infra and configuring github secrets, you should be a
 ## Testing
 These are already unittests that are included as a part of this repo, which are configured to automtically run on each commit. If you were to expand this testing into a prod setting, it could be worth setting up an integration tests for testing the process of actually hitting the API endpoint, intead of just testing the logic that happens when the API is hit.  
 
-#  Observability
+## Observability
 The load balancer target group should be automatically pinging the /health endpoint on a successful deployment, which allows us insight into the current health status of the ECS deployment. This can be further configured to send alerts depending on the current health status of the deployment. In addition, logging on the ECS level and within the container gives us visibility into what is going on within the service
 
 ## Resiliency

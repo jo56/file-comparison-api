@@ -28,7 +28,7 @@ The repo already includes code mainitng a CI/CD workflow for deploying the API a
 After creating all of this infra and configuring github secrets, you should be able to access the endpoint in a deployed setting by hitting the DNS name instead of http://127.0.0.1:8000. In addition, subsequent commits to the main branch should automatically trigger redpeloyments
 
 #Testing\
-These are already unittests that are included as a part of this repo, which are configured to automtically run on each commit. If you were to expand this testing into a more prod setting, it could be worth setting up an integration tests for testing the process of actually hitting the API endpoint, intead of just testing the logic that happens when the API is hit. \
+These are already unittests that are included as a part of this repo, which are configured to automtically run on each commit. If you were to expand this testing into a more prod setting, it could be worth setting up an integration tests for testing the process of actually hitting the API endpoint, intead of just testing the logic that happens when the API is hit. 
 
 #Observability\
 The load balancer trgetr group should will be automatically pining the /health endpoint on a successful deployment, which allows us insight into the current healht status of the ECS deployment. This can be further configured to ping alerts depending on the current health status of the deployment. In addition, logging on the ECS level and within the container gives us visibility into what is going on within the service\

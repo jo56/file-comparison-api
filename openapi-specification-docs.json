@@ -37,15 +37,15 @@
                 }
             }
         },
-        "/compare": {
-            "post": {
+        "/compare_files": {
+            "get": {
                 "summary": "Compare Files",
-                "operationId": "compare_files_compare_post",
+                "operationId": "compare_files_compare_files_get",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "$ref": "#/components/schemas/Body_compare_files_compare_post"
+                                "$ref": "#/components/schemas/Body_compare_files_compare_files_get"
                             }
                         }
                     },
@@ -76,7 +76,7 @@
     },
     "components": {
         "schemas": {
-            "Body_compare_files_compare_post": {
+            "Body_compare_files_compare_files_get": {
                 "properties": {
                     "file1": {
                         "type": "string",
@@ -94,7 +94,7 @@
                     "file1",
                     "file2"
                 ],
-                "title": "Body_compare_files_compare_post"
+                "title": "Body_compare_files_compare_files_get"
             },
             "HTTPValidationError": {
                 "properties": {

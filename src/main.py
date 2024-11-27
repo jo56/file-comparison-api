@@ -17,7 +17,7 @@ def health_check():
     return {"Health": "Sucessful"}
 
 
-@app.post("/compare")
+@app.get("/compare_files")
 async def compare_files(
     file1: UploadFile = File(...), 
     file2: UploadFile = File(...)

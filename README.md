@@ -8,13 +8,14 @@
 "Sucessful": "Connection"
 }
 The primary prupose of this api is to use the /compare endpoint to compare two files and detect changes within the ocntents of the files. It supports .py, .txt, .pdf, and .ts, and can allow comparison between files with two difference extensions\
-\
+
 
 #Prod Checklist \
-#Deployment
-1. The repo already includes code mainitng a CI/CD workflow for deploying the API as an ECS task in AWS. To ensure that the deployments run successfully, follow these steps
-  Update your repo's secret values to include the proper AWS creds
-2. Set up infrastructe in AWS. Though updating these should be automatic on push, you'll still need to make sure that that the AWS inra is set up in the first place. Configure the following infra using he names provided in the 'deploy.yml' file. Feel free to consult for AWS docs as for how to set these up. You should be able to use th eexisitng resources to fill parameters when creating these services. Create the first go arounds for this infa in this order\
+
+#Deployment\
+The repo already includes code mainitng a CI/CD workflow for deploying the API as an ECS task in AWS. To ensure that the deployments run successfully, follow these steps\
+  1. Update your repo's secret values to include the proper AWS creds:
+  2. Set up the following infrastructe in AWS. \ Though updating these should be automatic on push, you'll still need to make sure that that the AWS inra is set up in the first place. Configure the following infra using the names provided in the 'deploy.yml' file. Feel free to consult for AWS docs as for how to set these up. You should be able to use th eexisitng resources to fill parameters when creating these services. Create the first go arounds for this infa in this order\
    a. Cloudwatch log group \
    b. ECR Repository \
    c. ECS Task Definition \
